@@ -128,8 +128,8 @@ var server = http.createServer(function (request, response) {
                 break;
             case "/checkCurrentUserAccessRight":
             
-                console.log("Checking Customer Access Right");
-                var custId = req.params.custId;
+                console.log("**Checking Customer Access Right");
+                var custId = request.session.customerId;
                 console.log("getCart" + custId);
                 console.log("Customer ID: " + custId);
 

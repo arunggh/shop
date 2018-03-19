@@ -259,10 +259,11 @@
                     success: function () {
 
                         alert("Thanks!");
+                        ShowNewProduct();
                     }
                 });
 
-                ShowNewProduct();
+                //setTimeout(function(){ShowNewProduct()}, 5000);
 
             });
             $('#registerForm').on( "submit",function(event) {

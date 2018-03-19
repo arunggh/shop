@@ -68,7 +68,7 @@
     });
 
     // Create Card - TO BE USED FOR TESTING ONLY (for now)
-    app.post("/cards", function(req, res, next) {
+ /*   app.post("/cards", function(req, res, next) {
         var options = {
             uri: endpoints.cardsUrl,
             method: 'POST',
@@ -84,10 +84,10 @@
         }.bind({
             res: res
         }));
-    });
+    });*/
 
     // Delete Customer - TO BE USED FOR TESTING ONLY (for now)
-    app.delete("/customers/:id", function(req, res, next) {
+    /*app.delete("/customers/:id", function(req, res, next) {
         console.log("Deleting Customer " + req.params.id);
         var options = {
             uri: endpoints.customersUrl + "/" + req.params.id,
@@ -101,10 +101,10 @@
         }.bind({
             res: res
         }));
-    });
+    });*/
 
     // Delete Address - TO BE USED FOR TESTING ONLY (for now)
-    app.delete("/addresses/:id", function(req, res, next) {
+   /* app.delete("/addresses/:id", function(req, res, next) {
         console.log("Deleting Address " + req.params.id);
         var options = {
             uri: endpoints.addressUrl + "/" + req.params.id,
@@ -118,10 +118,10 @@
         }.bind({
             res: res
         }));
-    });
+    });*/
 
     // Delete Card - TO BE USED FOR TESTING ONLY (for now)
-    app.delete("/cards/:id", function(req, res, next) {
+   /* app.delete("/cards/:id", function(req, res, next) {
         console.log("Deleting Card " + req.params.id);
         var options = {
             uri: endpoints.cardsUrl + "/" + req.params.id,
@@ -135,7 +135,7 @@
         }.bind({
             res: res
         }));
-    });
+    });*/
 
     // Create Customer - TO BE USED FOR TESTING ONLY (for now)
     app.post("/register", function(req, res, next) {
@@ -224,29 +224,18 @@
     
     app.post("/checkCurrentUserAccessRight", function(req, res, next) {
         var options = {
-            uri: endpoints.checkCurrentUserAccessRight,
+            uri: "http://localhost:3001/checkCurrentUserAccessRight",
             method: 'POST',
             json: true,
             body: req.body
         };
-        var custId = req.params.custId;
+        var custId = req.session.customerId;
         console.log("getCart******" + custId);
         console.log("Access right: " + JSON.stringify(options));
         console.log("Checking access right for Customer: " + JSON.stringify(req.body));
         request(options, function(error, response, body) {
-            if (error !== null ) {
-                console.log("error "+JSON.stringify(error));
-                return;
-            }
-            if (response.statusCode == 200 &&
-                body != null && body != "") {
-           //     body = JSON.parse(body);
-                console.log('body '+JSON.stringify(body))
-                return;
-            }
-            console.log("response access right");
-            console.log(response.statusCode);
-
+        	console.log("jjj");
+        	return;
         });
 
     });
