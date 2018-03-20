@@ -127,21 +127,21 @@ var server = http.createServer(function (request, response) {
 
                 break;
             case "/checkCurrentUserAccessRight":
-            
-                console.log("**Checking Customer Access Right");
-                var custId = request.session.customerId;
-                console.log("getCart" + custId);
-                console.log("Customer ID: " + custId);
-
-
+            	var body='';
+                console.log("user Id:" + theuserid);;
+                request.on('data', function (data) {
+                    body += data;
+                });
+                
+                console.log("Access 1: " + JSON.stringify(body));
+                console.log("Access 4: " + JSON.stringify(request.id));
             request.on('end', function () {
                 var obj = JSON.parse(body);
                 console.log(JSON.stringify(obj, null, 2));
-                var query = "select * from groups ga join customer_group cg where ga.id = cg.group_id and cg.customer_id='"+custId+"'";
+                var query = "select g.name from groups g join customer_group cg where g.id = cg.group_id and g.name='admin' and cg.customer_id='"+theuserid+"'";
                 response.writeHead(200, {
                     'Access-Control-Allow-Origin': '*'
                 });
-
                 db.query(
                     query,
                     [],
@@ -151,16 +151,14 @@ var server = http.createServer(function (request, response) {
                             throw err;
                         }
                         if (rows!=null && rows.length>0) {
-                            console.log(" user already in database");
-                            response.end('{"error": "2"}');
+                            console.log(" user is admin");
+                            response.end('{"admin": "true"}');
+                        }else{
+                        	 response.end('{"admin": "false"}');
                         }
-                        else{
-                        	
-                        }
-
                     }
                 );
-
+                
 
             });
             break;
@@ -171,4 +169,5 @@ var server = http.createServer(function (request, response) {
 
 });
 server.listen(3001);
+
 

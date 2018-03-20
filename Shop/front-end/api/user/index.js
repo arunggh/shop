@@ -223,20 +223,26 @@
     });
     
     app.post("/checkCurrentUserAccessRight", function(req, res, next) {
-        var options = {
-            uri: "http://localhost:3001/checkCurrentUserAccessRight",
-            method: 'POST',
-            json: true,
-            body: req.body
-        };
         var custId = req.session.customerId;
         console.log("getCart******" + custId);
+        var customer = {
+        		id: custId
+        };
+    	var options = {
+            uri: endpoints.checkCurrentUserAccessRightURL+'?id='+custId,
+            method: 'POST',
+            json: true,
+            body: customer
+        };
         console.log("Access right: " + JSON.stringify(options));
         console.log("Checking access right for Customer: " + JSON.stringify(req.body));
         request(options, function(error, response, body) {
-        	console.log("jjj");
-        	return;
+        	console.log("jjj "+body);
+        	console.log("2222: " + JSON.stringify(response));
+        	res.admin2="fer";
+          	return;
         });
+        res.admin="arun";
 
     });
     

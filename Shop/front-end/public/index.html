@@ -321,15 +321,48 @@
             $("#newProductButton").hide();
         });
         function ShowNewProduct(){
-                $.post(
+    /*             $.post(
                         "/checkCurrentUserAccessRight",
                         "",
                         function (data) {
-                            console.log(data);
-                        /*     $('#logonmessage').html(data); */
+                            console.log("****-"+data);
+                            alert(JSON.stringify(data));
                         }
                 );
+                 */
+//         	$.ajax
+//             ({
+//                 type: "POST",
+//                 url: "/checkCurrentUserAccessRight",
+//                 data: "",
+//                 success: function (data) {
+//                 	 alert("arun1");
+//                 	console.log("****-"+JSON.stringify(data));
+//                     alert("arun2");
+//                    // ShowNewProduct();
+//                 }
+//             });
+        	$.post(
+                    "/checkCurrentUserAccessRight",
+                    null,
+                    function (data) {
+                        console.log('22222222222222');
+                       // $('#logonmessage').html(data);
+                    }
+            );
         }
+        
+        jQuery.postJSON = function(url, dataContent, callback) {
+        	return jQuery.ajax({
+        		url : url,
+        		type : "POST",
+        		success : callback,
+        		scriptCharset : "utf-8",
+        		contentType : 'application/json; charset=utf-8',
+        		data : dataContent,
+        		dataType : "json",
+        	});
+        };
     </script>
 </head>
 <body>
