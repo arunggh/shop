@@ -28,6 +28,33 @@ var server = http.createServer(function (request, response) {
 
             /* TODO */
             case "/newProduct":
+            	console.log("New Product######");
+                var body="";
+                request.on('data', function (data) {
+                    body += data;
+                });
+
+                request.on('end', function () {
+                    var product = JSON.parse(body);
+                    response.writeHead(200, {
+                        'Content-Type': 'text/html',
+                        'Access-Control-Allow-Origin': '*'
+                    });
+                    console.log(JSON.stringify(product, null, 2));
+                    var query = "INSERT INTO products(quantity,price,image,name) VALUES(100,'.5','car2.jpeg','"+product.name+"')"
+
+                    db.query(
+                        query,
+                        [],
+                        function(err, rows) {
+                            if (err) throw err;
+                            console.log(JSON.stringify(rows, null, 2));
+                            response.end(JSON.stringify(rows[0]));
+                            console.log("Products added");
+                        }
+                    );
+
+                });
 
 
                 break;

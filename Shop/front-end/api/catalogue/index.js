@@ -14,6 +14,22 @@
         .on('error', function(e) { next(e); })
         .pipe(res);
   });
+  
+  app.post("/newProduct", function (req, res, next) {
+	    console.log("New Product ££");
+    	var options = {
+            uri: endpoints.catalogueUrl+"/newProduct",
+            method: 'POST',
+            json: true,
+            body: req.body
+        };
+        request(options, function(error, response, body) {
+        	console.log("return data: " + JSON.stringify(body));
+        	res.end(body);
+          	return;
+        });
+        res.end();
+	  });
 
   app.get("/getProducts", function (req, res, next) {
     var x = endpoints.catalogueUrl+"/getProducts" ;//+ req.url.toString();

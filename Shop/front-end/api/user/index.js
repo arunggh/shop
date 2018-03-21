@@ -224,7 +224,6 @@
     
     app.post("/checkCurrentUserAccessRight", function(req, res, next) {
         var custId = req.session.customerId;
-        console.log("getCart******" + custId);
         var customer = {
         		id: custId
         };
@@ -234,15 +233,14 @@
             json: true,
             body: customer
         };
-        console.log("Access right: " + JSON.stringify(options));
-        console.log("Checking access right for Customer: " + JSON.stringify(req.body));
         request(options, function(error, response, body) {
-        	console.log("jjj "+body);
-        	console.log("2222: " + JSON.stringify(response));
-        	res.admin2="fer";
+        	console.log("return data: " + JSON.stringify(body));
+        	res.end(body);
           	return;
         });
-        res.admin="arun";
+        console.log("return data2 : " + JSON.stringify(res.body));
+        console.log("return data3 : " + JSON.stringify(body));
+        res.end();
 
     });
     

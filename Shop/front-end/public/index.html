@@ -299,9 +299,9 @@
             });
             $('#newProductForm').on( "submit",function(event) {
 
-                event.preventDefault();
+             //   event.preventDefault();
                 $("#newProduct").hide();
-                var fd = $('#newProductForm').serialize();
+/*                 var fd = $('#newProductForm').serialize();
 
                 $.post(
                         "/newProduct",
@@ -310,43 +310,49 @@
                             console.log(data);
                             $('#logonmessage').html(data);
                         }
-                );
+                ); */
+///////////////////////////////////////
 
+                var o={};
+                var a = $('#newProductForm').serializeArray();
+                $.each(a, function() {
+                    if (o[this.name] !== undefined) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
+                        }
+                        o[this.name].push(this.value || '');
+                    } else {
+                        o[this.name] = this.value || '';
+                    }
+                });
+                var fd =JSON.stringify(o);
+                console.log(fd);
+                $.ajax
+                ({
+                    type: "POST",
+                    url: "/newProduct",
+                    contentType: 'application/json',
+                    data: fd,
+                    success: function () {
+
+                        alert("Thanks!");
+                    }
+                });
 
             });
             getProducts();
             $("#login").hide();
             $('#register').hide();
             $("#newProduct").hide();
-            $("#newProductButton").hide();
+          //  $("#newProductButton").hide();
         });
         function ShowNewProduct(){
-    /*             $.post(
-                        "/checkCurrentUserAccessRight",
-                        "",
-                        function (data) {
-                            console.log("****-"+data);
-                            alert(JSON.stringify(data));
-                        }
-                );
-                 */
-//         	$.ajax
-//             ({
-//                 type: "POST",
-//                 url: "/checkCurrentUserAccessRight",
-//                 data: "",
-//                 success: function (data) {
-//                 	 alert("arun1");
-//                 	console.log("****-"+JSON.stringify(data));
-//                     alert("arun2");
-//                    // ShowNewProduct();
-//                 }
-//             });
+
         	$.post(
                     "/checkCurrentUserAccessRight",
                     null,
                     function (data) {
-                        console.log('22222222222222');
+                        console.log(data);
                        // $('#logonmessage').html(data);
                     }
             );
