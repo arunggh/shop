@@ -53,6 +53,19 @@
         tr:nth-child(even) {
             background-color: #dddddd;
         }
+        
+        .button {
+		    background-color: #4CAF50;
+		    border: none;
+		    color: white;
+		    padding: 15px 32px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+}
     </style>
 
 
@@ -215,10 +228,15 @@
                 out += "</tr>";
                 total += cart[i].price* cart[i].quantity;
             }
+            out += "<tr>";
+            out += '<td colspan="5" bgcolor=#000000 style="color:#ffffff;font-weight:bold;" > Total Amount</td>';
+            out += '<td bgcolor=#000000 style="color:#ffffff;font-weight:bold";bgcolor=#000000 > &euro; ' + total + '</td>';
+            out += "</tr>";
+            out += "<tr>";
+            out += '<td colspan="6" style="text-align:center;" >';
+            out += '<button onclick="checkout()" class="button">Checkout</button></td>';
+            out += "</tr>";
             out += "</table>";
-            out += "<br>";
-            out += "Total: "+total +'<br>';
-            out += '<button onclick="checkout()">Checkout</button><br>';
             out+='<div id="cartmessage"></div>';
             document.getElementById(name).innerHTML = out;
         }
