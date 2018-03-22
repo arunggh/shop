@@ -144,7 +144,7 @@
                 data: JSON.stringify(dat),
                 success: function () {
 
-                    alert("Thanks!");
+                    alert("Items addedd to cart!");
                 }
             });
 
@@ -315,17 +315,14 @@
                     data: fd,
                     success: function () {
 
-                        alert("Thanks!");
+                        alert("Thanks for registering!");
                     }
                 });
 
             });
             $('#newProductForm').on( "submit",function(event) {
 
-             //   event.preventDefault();
                 $("#newProduct").hide();
-///////////////////////////////////////
-
                 var o={};
                 var a = $('#newProductForm').serializeArray();
                 $.each(a, function() {
@@ -348,7 +345,7 @@
                     data: fd,
                     success: function () {
 
-                        alert("Thanks!");
+                        alert("New Product is added!");
                     }
                 });
 
@@ -357,18 +354,24 @@
             $("#login").hide();
             $('#register').hide();
             $("#newProduct").hide();
-          //  $("#newProductButton").hide();
+            $("#newProductButton").hide();
         });
         function ShowNewProduct(){
-
-        	$.post(
-                    "/checkCurrentUserAccessRight",
-                    null,
-                    function (data) {
-                        console.log(data);
-                       // $('#logonmessage').html(data);
+       	
+            $.ajax
+            ({
+                type: "POST",
+                url: "/checkCurrentUserAccessRight",
+                contentType: 'application/json',
+                data: '',
+                success: function (data) {
+                    if('TRUE' == data.admin.toUpperCase()){
+                    	$("#newProductButton").show();
+                    }else{
+                    	$("#newProductButton").hide();
                     }
-            );
+                }
+            });
         }
         
         jQuery.postJSON = function(url, dataContent, callback) {

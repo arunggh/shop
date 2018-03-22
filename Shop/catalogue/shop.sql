@@ -53,7 +53,7 @@ CREATE TABLE `customer` (
   `password` varchar(40) NOT NULL,
   `address` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`customerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +62,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'joe','joe','cork'),(2,'mary','mary','dublin'),(3,'joey','joey','london'),(4,'fred','fred','dublin'),(5,'admin','admin','arun'),(6,'Arun2','arun2','arun2'),(7,'Arun','arun','arun1');
+INSERT INTO `customer` VALUES (1,'joe','joe','cork'),(2,'mary','mary','dublin'),(3,'joey','joey','london'),(4,'fred','fred','dublin'),(5,'admin','admin','arun'),(6,'Arun2','arun2','arun2'),(7,'Arun','arun','arun1'),(8,'admin','admin','admin');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +89,7 @@ CREATE TABLE `customer_group` (
 
 LOCK TABLES `customer_group` WRITE;
 /*!40000 ALTER TABLE `customer_group` DISABLE KEYS */;
-INSERT INTO `customer_group` VALUES (1,1),(1,2),(1,3),(1,4),(2,5),(1,6),(1,7),(2,6);
+INSERT INTO `customer_group` VALUES (1,1),(1,2),(1,3),(1,4),(2,5),(1,6),(1,7),(2,6),(2,8);
 /*!40000 ALTER TABLE `customer_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +207,7 @@ CREATE TABLE `products` (
   `price` decimal(7,2) NOT NULL DEFAULT '99999.99',
   `image` varchar(30) NOT NULL DEFAULT '',
   PRIMARY KEY (`productID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +216,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Car 1',10000,0.48,'car1.jpeg'),(2,'Car 2',8000,0.49,'car2.jpeg'),(3,'Car 5',100,0.22,'car4.jpeg'),(4,'Car 6',80,0.33,'car3.jpeg');
+INSERT INTO `products` VALUES (1,'Car 1',10000,0.48,'car1.jpeg'),(2,'Car 2',8000,0.49,'car2.jpeg'),(3,'Car 5',100,0.22,'car4.jpeg'),(4,'Car 6',80,0.33,'car3.jpeg'),(5,'',100,0.50,'car2.jpeg'),(6,'xyz',100,0.50,'car3.jpeg'),(7,'wuz',100,0.50,'car1.jpeg'),(8,'FernandoTecuCu',100,0.50,'car2.jpeg');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -229,4 +229,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-16 17:24:43
+-- Dump completed on 2018-03-22 20:00:04

@@ -223,7 +223,17 @@
     });
     
     app.post("/checkCurrentUserAccessRight", function(req, res, next) {
-        var custId = req.session.customerId;
+        
+       getCheck(req,function(err, data){ 
+        	console.log("return data**: " + JSON.stringify(data));
+            if(err) return res.send(err);       
+            res.send(data);
+        });
+        
+    });
+    
+    function getCheck(req,callback){
+    	var custId = req.session.customerId;
         var customer = {
         		id: custId
         };
@@ -235,14 +245,9 @@
         };
         request(options, function(error, response, body) {
         	console.log("return data: " + JSON.stringify(body));
-        	res.end(body);
-          	return;
+        	return callback(false, body);
         });
-        console.log("return data2 : " + JSON.stringify(res.body));
-        //console.log("return data3 : " + JSON.stringify(body));
-        res.end();
-
-    });
+    }
     
    module.exports = app;
 }());
