@@ -40,8 +40,22 @@ app.post("/add", function (req, res, next) {
         "quantity": obj.quantity
     };
     console.log(JSON.stringify(data));
-    c.push(data);
-
+    
+    // check if product with same ID exist in cart. if exist update quantity and price in cart
+    var flagProductInCart = false;
+    if (c.length>0){
+        for(var i = 0; i < c.length; i++){
+        	if(c[i].productID==data.productID){
+        		c[i].quantity = Number(c[i].quantity) + Number(1);
+        		c[i].price = Number(c[i].price) + Number(c[i].price);
+        		flagProductInCart = true;
+        	}
+        }
+    }
+    // if product does not exist in cart, add into cart
+    if(!flagProductInCart){
+    	c.push(data);
+    }
     res.status(201);
 
     res.send("");
