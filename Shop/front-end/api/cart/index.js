@@ -68,6 +68,7 @@
 
   // Delete item from cart
   app.delete("/cart/:id", function (req, res, next) {
+	  console.log("I am here");
     if (req.params.id == null) {
       return next(new Error("Must pass id of item to delete"), 400);
     }
@@ -153,5 +154,25 @@
     });
   });
 
+  app.get("/deleteCart", function (req, res, next) {
+	    console.log("Attempting to delete items from cart: " + req.query.item);
+	    var itemCount = req.query.item;
+	    var custId = helpers.getCustomerId(req, app.get("env"));
+	    var options = {
+	      uri: endpoints.cartsUrl + "/deleteItemsCart",
+	      method: 'POST',
+	      json: true,
+          body: {custId: custId,
+              item: itemCount
+            }
+       
+	    };
+        request(options, function(error, response, body) {
+        	res.end(body);
+          	return;
+        });
+        res.status(201);
+        res.send("");
+	  });
   module.exports = app;
 }());

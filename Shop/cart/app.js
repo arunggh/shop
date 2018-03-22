@@ -63,6 +63,39 @@ app.post("/add", function (req, res, next) {
 
 });
 
+app.post("/deleteItemsCart", function (req, res, next) {
+	console.log("deleting items from cart ");
+	var obj = req.body;
+    console.log("deleting: " + JSON.stringify(req.body));
+    var max = 0;
+    var ind = 0;
+    if (cart["" + obj.custId] === undefined)
+        cart["" + obj.custId] = [];
+    var c = cart["" + obj.custId];
+    for (ind = 0; ind < c.length; ind++)
+        if (max < c[ind].cartid)
+            max = c[ind].cartid;
+    var cartid = max + 1;
+    
+    console.log('c.length '+c.length);
+    // here checking product Id and deleting that row having that product id from cart
+    if (c.length>0){
+    	
+        for(var i = 0; i < c.length; i++){
+        	if(c[i].productID == obj.item){
+        		c.splice(Number(i), 1);
+        	}
+        }
+    	
+    }
+    console.log('c.length '+c.length);
+    res.status(201);
+
+    res.send("");
+
+
+});
+
 /* toDO */
 app.delete("/cart/:custId/items/:id", function (req, res, next) {
     var body = '';

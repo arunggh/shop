@@ -164,14 +164,19 @@
 
         }
 
-        function deleteCartItem(count) {
-            $.post(
-                    "/delete",
-                    {cnt: count},
-                    function (data) {
+        function deleteCartItem(productId) {
+            // instead of row count I am here getting product Id which I will be comparing against
+            //some strange reason my http delete was getting some problem. My eclipse was showing some compilation error do dleting this way ;)
+        	$.get('/deleteCart', {item: productId})
+            .success(
+                function(success){
+                	getCart();
+                })
+            .error(
+                function(error){
+                    console.log("Error delete card items")
+                });
 
-                    }
-            );
 
         }
 
@@ -220,7 +225,7 @@
                 out += '<td>' + cart[i].price + '</td>';
                 out += '<td> <img src="';
                 out += "images/" + cart[i].image + '" style="width:104px;height:100px;">';
-                out += '<td> <button onclick="deleteCartItem(' + cart[i].cartid;
+                out += '<td> <button onclick="deleteCartItem(' + cart[i].productID;
                 out1 = ")" + '">Delete</button></td>';
                 out += out1;
                 out += '<td>' + cart[i].quantity + '</td>';
@@ -319,16 +324,6 @@
 
              //   event.preventDefault();
                 $("#newProduct").hide();
-/*                 var fd = $('#newProductForm').serialize();
-
-                $.post(
-                        "/newProduct",
-                        fd,
-                        function (data) {
-                            console.log(data);
-                            $('#logonmessage').html(data);
-                        }
-                ); */
 ///////////////////////////////////////
 
                 var o={};
